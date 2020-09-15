@@ -3,10 +3,12 @@ package com.demo.mapstruct.mavenmapstruct.service;
 import com.demo.mapstruct.mavenmapstruct.domain.web.request.CheckClient;
 import com.demo.mapstruct.mavenmapstruct.domain.web.request.CreateClient;
 import com.demo.mapstruct.mavenmapstruct.domain.web.response.GeneralResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
+@RequiredArgsConstructor
 public class CheckClientServiceImpl implements CheckClientService {
     private final CheckClientConverter checkClientConverter;
     private final RestTemplate restTemplate;

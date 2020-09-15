@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ClientController {
     private final ClientService createClientService;
-    @PostMapping
+    @PostMapping(path="addClient")
     public ResponseEntity<GeneralResponse> addClient(CreateClient createClient) {
         createClientService.createClient(createClient);
         return ResponseEntity.ok(new GeneralResponse());
     }
 
-    @PostMapping
+    @PostMapping(path="addAddress")
     public ResponseEntity<GeneralResponse> addAddress(AddClientAddress addAddress) {
         createClientService.addAddress(addAddress);
         return ResponseEntity.ok(new GeneralResponse());
