@@ -36,6 +36,11 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.3.3.RELEASE'
 }
 
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.defaultComponentModel=true'
+    ]
+}
 
 
 publishing {

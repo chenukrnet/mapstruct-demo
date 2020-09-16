@@ -10,14 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class ClientDao {
-    private final ClientRepository clientRepository;
-    private final CreatedClientFiller createdClientFiller;
-    private CreateClientToEntityConverter createClientToEntityConverter;
+	private final ClientRepository clientRepository;
+	private final CreatedClientFiller createdClientFiller;
+	private final CreateClientToEntityConverter createClientToEntityConverter;
 
-    public CreatedClient createClient(CreateClient createClient) {
-        ClientEntity newClient = createClientToEntityConverter.convert(createClient);
-        CreatedClient dto = new CreatedClient();
-         createdClientFiller.fill(newClient, dto);
-         return dto;
-    }
+	public CreatedClient createClient(CreateClient createClient) {
+		ClientEntity newClient = createClientToEntityConverter.convert(createClient);
+		clientRepository.saveAndFlush(newClient);
+		CreatedClient dto = new CreatedClient();
+		createdClientFiller.fill(newClient, dto);
+		return dto;
+	}
 }
