@@ -5,7 +5,12 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'net.ltgt.apt' version '0.20' //https://github.com/tbroyer/gradle-apt-plugin
 }
+group = 'com.demo.mapstruct'
+version = '1.0.0'
+description = 'maven-map-struct'
+sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenLocal()
@@ -17,19 +22,21 @@ repositories {
 dependencies {
     implementation 'org.mapstruct:mapstruct:1.4.0.CR1'
     implementation 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor  'org.mapstruct:mapstruct-processor:1.4.0.CR1'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.3.3.RELEASE'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor  'org.mapstruct:mapstruct-processor:1.4.0.CR1'
+    testAnnotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.3.3.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.3.3.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.3.3.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.3.3.RELEASE'
     implementation 'org.postgresql:postgresql:42.2.14'
     implementation 'org.testcontainers:junit-jupiter:1.14.3'
     implementation 'org.testcontainers:postgresql:1.14.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.3.3.RELEASE'
 }
 
-group = 'com.demo.mapstruct'
-version = '1.0.0'
-description = 'maven-map-struct'
-sourceCompatibility = '1.8'
+
 
 publishing {
     publications {
@@ -37,6 +44,10 @@ publishing {
             from(components.java)
         }
     }
+}
+
+test {
+    useJUnitPlatform()
 }
 
 tasks.withType(JavaCompile) {
